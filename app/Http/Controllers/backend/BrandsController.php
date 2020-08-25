@@ -10,9 +10,11 @@ class BrandsController extends Controller
 {
     public function view()
     {
-        $brands = brands::get();
-        return view('layouts.admin.storemanagment.brands.brand_view',compact('brands'));
 
+//        $brands = brands::get();
+//        return view('layouts.admin.storemanagment.brands.brand_view',compact('brands'));
+        $brands = brands::get();
+        return view('layouts.admin.storemanagment.brands.brand_',compact('brands'));
     }
 
     public function add()
@@ -46,7 +48,7 @@ class BrandsController extends Controller
 
             $brands->save();
 
-
+return $brands;
 
         } catch (Exception $exception) {
             $brands = false;

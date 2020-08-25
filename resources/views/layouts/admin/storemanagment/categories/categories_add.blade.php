@@ -26,6 +26,7 @@
                                     <input type="text" class="form-control" id="category_name" name="category_name">
                                     <p class="cat_p_desc">{{__('The name is how it appears on your site.')}}</p>
                                 </div>
+                                <!-- Parent category content -->
                                 <div class="form-group">
                                     <label for="cat_name">{{__('parent category')}}</label>
                                     <select name="category"  class="form-control" id="category">
@@ -33,12 +34,11 @@
                                         @foreach($categories as $category)
 
 
-                                            @include('layouts.admin.storemanagment.categories.subCategoryList',['category' => $category,'level'=>0])
+                                            @include('layouts.admin.partials._category',['category' => $category,'level'=>0])
 
                                         @endforeach
                                     </select>
 
-                                    <!-- Parent category content -->
                                 </div>
 
 

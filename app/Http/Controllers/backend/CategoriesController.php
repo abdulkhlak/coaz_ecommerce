@@ -78,9 +78,15 @@ class CategoriesController extends Controller
 
     public function edit($id)
     {
+
         $id= base64_decode($id);
         $category = Categories::find($id);
-        return view('layouts.admin.storemanagment.categories.category_edit', compact('category'));
+        //dd($category);
+        $allchilds = Categories::with('allChild')
+            ->where('status','=',1)
+            ->where('parent_id','=',0)
+            ->get();
+        return view('layouts.admin.storemanagment.categories.category_edit', compact('category','allchilds'));
     }
 
 
@@ -98,7 +104,7 @@ class CategoriesController extends Controller
                 'category_name' => $category_name,
                 'category_slug' => slugify($category_name),
                 'category_desc' =>$request->category_desc,
-                'category_parent' =>$request->category_parent,
+                'parent_id' =>$request->category,
                 'status' => $request->status,
 
             ]);

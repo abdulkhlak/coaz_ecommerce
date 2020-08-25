@@ -4,12 +4,12 @@
 
     <section class="content-header">
         <h1>
-            {{__('Brand edit details')}}
-            <a href="{{route('brands_view')}}" class="btn btn-sm btn-success"> {{__('Brand list ')}}</a>
+            {{__('Category edit details')}}
+            <a href="{{route('categories_view')}}" class="btn btn-sm btn-success"> {{__('Category list ')}}</a>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{route("admin-dashboard")}}"> {{__('Dashboard')}}</a></li>
-            <li class="active">{{__('Brand edit')}}</li>
+            <li class="active">{{__('Category edit')}}</li>
         </ol>
     </section>
     <section class="content">
@@ -35,6 +35,17 @@
                                         {{ __('The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.') }}
                                     </p>
                                 </div>
+{{--                                @dd($category->parent_id)--}}
+                                <select name="category"  class="form-control" id="category">
+                                    <option value="0">None</option>
+                                    @foreach($allchilds as $allchild)
+
+
+                                        @include('layouts.admin.partials._child_category_edit',['allchild' => $allchild,
+                                        'selectedData'=>$category->parent_id,'category_id'=>$category->id, 'level'=>0])
+
+                                    @endforeach
+                                </select>
                                 <div class="form-group">
                                     <label for="cat_desc">{{__('Description')}}</label><br/>
                                     <textarea class="" name="category_desc" id="category_desc" rows="5"
