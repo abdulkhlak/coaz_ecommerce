@@ -22,18 +22,19 @@
     <link rel="stylesheet" href="{{asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
     <script src="{{asset('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')}}"></script>
     <script src="{{asset('https://oss.maxcdn.com/respond/1.4.2/respond.min.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic')}}">
+    <link rel="stylesheet"
+          href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic')}}">
     <!-- pluign css -->
 {{--    <link href="{{asset('backend')}}/plugins/mCustomScrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">--}}
 
-    <!-- DataTables -->
+<!-- DataTables -->
     <link rel="stylesheet" href="{{asset('backend')}}/plugins/datatables/dataTables.bootstrap.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset("backend")}}/plugins/select2/select2.min.css">
     <!-- font awsemae --->
     <script src="https://kit.fontawesome.com/c692cc0aa4.js" crossorigin="anonymous"></script>
     <style>
-        .notifyjs-corner{
+        .notifyjs-corner {
             z-index: 10000 !important;
         }
     </style>
@@ -43,18 +44,17 @@
 <div class="wrapper">
 
     <!--header-->
-    @include('layouts.header')
+@include('layouts.header')
 
-        <!--sidebar for admin-->
-   @include('layouts.sidebar')
+<!--sidebar for admin-->
+    @include('layouts.sidebar')
 
 
     <div class="content-wrapper">
 
 
-
-      <!-- section of dashboard -->
-    @yield('content')
+        <!-- section of dashboard -->
+        @yield('content')
 
 
     </div>
@@ -94,7 +94,7 @@
 @if(session()->has('success'))
     <script>
         $(function () {
-            $.notify("{{session()->get('success')}}",{globalPostion:'top right',className:'success'});
+            $.notify("{{session()->get('success')}}", {globalPostion: 'top right', className: 'success'});
         });
     </script>
 @endif
@@ -102,9 +102,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
     $(function () {
-        $(document).on('click','#delete',function (e) {
-          e.preventDefault();
-          var link =$(this).attr("href");
+        $(document).on('click', '#delete', function (e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -115,7 +115,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.value) {
-                    window.location.href=link;
+                    window.location.href = link;
                     Swal.fire(
                         'Deleted!',
                         'Your file has been deleted.',

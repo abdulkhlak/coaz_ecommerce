@@ -14,7 +14,7 @@ class BrandsController extends Controller
 //        $brands = brands::get();
 //        return view('layouts.admin.storemanagment.brands.brand_view',compact('brands'));
         $brands = brands::get();
-        return view('layouts.admin.storemanagment.brands.brand_',compact('brands'));
+        return view('layouts.admin.storemanagment.brands.brand_', compact('brands'));
     }
 
     public function add()
@@ -25,15 +25,15 @@ class BrandsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'brand_name' => ['required', 'string', 'max:100','unique:brands,brand_name'],
+            'brand_name' => ['required', 'string', 'max:100', 'unique:brands,brand_name'],
         ]);
-        $brands= null;
+        $brands = null;
         try {
             $brand_name = $request->brand_name;
             $brands = Brands::create([
                 'brand_name' => $brand_name,
                 'brand_slug' => slugify($brand_name),
-                'brand_desc' =>$request->brand_desc,
+                'brand_desc' => $request->brand_desc,
                 'status' => $request->status,
 
             ]);
@@ -48,7 +48,7 @@ class BrandsController extends Controller
 
             $brands->save();
 
-return $brands;
+            return $brands;
 
         } catch (Exception $exception) {
             $brands = false;
@@ -71,26 +71,26 @@ return $brands;
 
     public function edit($id)
     {
-        $id= base64_decode($id);
+        $id = base64_decode($id);
         $brands = Brands::find($id);
         return view('layouts.admin.storemanagment.brands.brand_edit', compact('brands'));
     }
 
 
-    public function update(Request $request , $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            "brand_name" => "required| unique:brands,brand_name,".$id,
+            "brand_name" => "required| unique:brands,brand_name," . $id,
 
         ]);
         $brand = brands::find($id);
-        $success= null;
+        $success = null;
         try {
             $brand_name = $request->brand_name;
-            $brand-> update([
+            $brand->update([
                 'brand_name' => $brand_name,
                 'brand_slug' => slugify($brand_name),
-                'brand_desc' =>$request->brand_desc,
+                'brand_desc' => $request->brand_desc,
                 'status' => $request->status,
 
             ]);
@@ -115,8 +115,8 @@ return $brands;
         }
 
 
-
     }
+
     public function delete($id)
     {
         $id = base64_decode($id);

@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="cat_desc">{{__('Brand status')}}</label><br/>
-                        <select class="form-control"  name="status" style="width: 30%;">
+                        <select class="form-control" name="status" style="width: 30%;">
                             <option selected disabled> Status</option>
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
@@ -57,102 +57,97 @@
 
         </div>
         <div class="col-md-8">
-<div class="box-body">
-    <table id="example1" class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th>{{__('ID')}}</th>
-            <th>{{__('Name')}}</th>
-            <th>{{__('Preview')}}</th>
-            <th>{{__('Description')}}</th>
-            <th>{{__('Slug')}}</th>
-            <th>{{__('status')}}</th>
-            <th>{{__('Action')}}</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($brands as $key => $brand)
-            <tr>
-                <td>{{$brand->id}}</td>
-                <td>{{$brand->brand_name}}</td>
-                <td><img style="width: 70px;height:50px;" id="img-uploaded" src="{{(!empty($brand->brand_logo))
-                                    ?url ('upload/store_managment/brands_logo/'.$brand->brand_logo):url('upload/no_image.png')}}" alt="brand logo" /></td>
-                <td>{{$brand->brand_desc}}</td>
-                <td>{{$brand->brand_slug}}</td>
-                <td >{{$brand->status ==1
-                                               ?'active':'inctive'}}</td>
-                <td>
-                    <a href="{{route('brands_edit', base64_encode($brand->id))}}"
-                       class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
-                    <a href="{{route('brands_delete', base64_encode
-                                     ($brand->id))}}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{__('ID')}}</th>
+                        <th>{{__('Name')}}</th>
+                        <th>{{__('Preview')}}</th>
+                        <th>{{__('Description')}}</th>
+                        <th>{{__('Slug')}}</th>
+                        <th>{{__('status')}}</th>
+                        <th>{{__('Action')}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($brands as $key => $brand)
+                        <tr>
+                            <td>{{$brand->id}}</td>
+                            <td>{{$brand->brand_name}}</td>
+                            <td><img style="width: 70px;height:50px;" id="img-uploaded" src="{{(!empty($brand->brand_logo))
+                                    ?url ('upload/store_managment/brands_logo/'.$brand->brand_logo):url('upload/no_image.png')}}"
+                                     alt="brand logo"/></td>
+                            <td>{{$brand->brand_desc}}</td>
+                            <td>{{$brand->brand_slug}}</td>
+                            <td>{{$brand->status ==1?'active':'inctive'}}</td>
+                            <td>
+                                <a href="{{route('brands_edit', base64_encode($brand->id))}}"class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
+                                <a href="{{route('brands_delete', base64_encode ($brand->id))}}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
 
-            </tr>
-        @endforeach
+                        </tr>
+                    @endforeach
 
-        </tbody>
-        <tfoot>
-        <tr>
-            <th>{{__('ID')}}</th>
-            <th>{{__('Name')}}</th>
-            <th>{{__('Preview')}}</th>
-            <th>{{__('Description')}}</th>
-            <th>{{__('Slug')}}</th>
-            <th>{{__('status')}}</th>
-            <th>{{__('Action')}}</th>
-        </tr>
-        </tfoot>
-    </table>
-</div><!-- /.box-body -->
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>{{__('ID')}}</th>
+                        <th>{{__('Name')}}</th>
+                        <th>{{__('Preview')}}</th>
+                        <th>{{__('Description')}}</th>
+                        <th>{{__('Slug')}}</th>
+                        <th>{{__('status')}}</th>
+                        <th>{{__('Action')}}</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </div>
     </div>
-    </div>
-    @endsection
+@endsection
 
 @section('scripts')
     <script>
-$(document).ready(function()
-{
-    $.ajaxSetup({
-        headers:
-            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-    });
-$("#addnew").click(function(e){
-e.preventDefault();
-    var formData = new FormData($('#brandform')[0]);
-    $.ajax({
-        url: "{{route('brands_store')}}",
-        data: formData,
-        contentType: false,
-        processData: false,
-        cache: false,
-        type: 'POST',
-        success: function(data) {
-           debugger;
-           var newdata="<tr>";
-           newdata+="<td>"+data.id+"</td>";
-            newdata+="<td>"+data.brand_name+"</td>";
-            newdata+="<td><img style='width: 70px;height:50px;' id='img-uploaded' src='";
-            if(data.brand_logo)
-                newdata+="/upload/store_managment/brands_logo/"+data.brand_logo+"'/></td>";
-            else
-                newdata+="/upload/no_image.png'/></td>";
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers:
+                    {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+            });
+            $("#addnew").click(function (e) {
+                e.preventDefault();
+                var formData = new FormData($('#brandform')[0]);
+                $.ajax({
+                    url: "{{route('brands_store')}}",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    type: 'POST',
+                    success: function (data) {
+                        var newdata = "<tr>";
+                        newdata += "<td>" + data.id + "</td>";
+                        newdata += "<td>" + data.brand_name + "</td>";
+                        newdata += "<td><img style='width: 70px;height:50px;' id='img-uploaded' src='";
+                        if (data.brand_logo)
+                            newdata += "/upload/store_managment/brands_logo/" + data.brand_logo + "'/></td>";
+                        else
+                            newdata += "/upload/no_image.png'/></td>";
 
-            newdata+="<td>"+data.brand_desc+"</td>";
-            newdata+="<td>"+data.brand_slug+"</td>";
-            if(data.status==1)
-            newdata+="<td>Active</td>";
-            else
+                        newdata += "<td>" + data.brand_desc + "</td>";
+                        newdata += "<td>" + data.brand_slug + "</td>";
+                        if (data.status == 1)
+                            newdata += "<td>Active</td>";
+                        else
 
-                newdata+="<td>Inactive</td>";
+                            newdata += "<td>Inactive</td>";
 
-            $("#example1 tbody").prepend(newdata);
-           $("#brandform")[0].reset();
-           $("#preview").attr('src','');
-            debugger;
-        },
-    });
-});
-});
+                        $("#example1 tbody").prepend(newdata);
+                        $("#brandform")[0].reset();
+                        $("#preview").attr('src', '');
+                    },
+                });
+            });
+        });
 
     </script>
-    @endsection
+@endsection

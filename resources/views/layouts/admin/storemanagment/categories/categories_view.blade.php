@@ -39,8 +39,15 @@
                                              alt="brand logo" /></td>
                                     <td>{{$category->category_desc}}</td>
                                     <td>{{$category->category_slug}}</td>
-                                    <td >{{$category->status ==1
-                                               ?'active':'inctive'}}</td>
+                                    <td>@if ($category->status=='1')
+                                            <span style="color:#fff0ff; background: #00A65A; padding: 3px 10px 3px 10px">{{__('active')
+                                    }}</span>
+                                        @elseif($category->status=='0')
+                                            <span style="color:#fff0ff; background: #DD4B39; padding: 3px 5px 3px 5px">{{__('Inactive')
+                                        }}</span>
+
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{route('categories_edit', base64_encode($category->id))}}"
                                            class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>

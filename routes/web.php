@@ -46,6 +46,20 @@ Route::group(['prefix' => 'categories',  'middleware' => 'auth'], function()
     Route::get('/delete/{id}','Backend\CategoriesController@delete')->name('categories_delete');
 
 });
+
+// SIZE ROUTE
+
+Route::group(['prefix' => 'size',  'middleware' => 'auth'], function()
+{
+    Route::get('/view','Backend\SizeController@view')->name('size_view');
+    Route::get('/add','Backend\SizeController@add')->name('size_add');
+    Route::post('/store','Backend\SizeController@store')->name('size_store');
+    Route::get('/categoryStatus/{id}/{s}','Backend\SizeController@sizeStatus')->name('size_status');
+    Route::get('/edit/{id}','Backend\SizeController@edit')->name('size_edit');
+    Route::post('/update/{id}','Backend\SizeController@update')->name('size_update');
+    Route::get('/delete/{id}','Backend\SizeController@delete')->name('size_delete');
+
+});
 // PRODUCT ROUTE
 
 Route::group(['prefix' => 'products',  'middleware' => 'auth'], function()

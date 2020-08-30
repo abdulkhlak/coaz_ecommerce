@@ -46,28 +46,37 @@
             ||(Route::currentRouteName() == 'categories_add')?
             'active': '' }} ">
                 <a href="#">
-                    <i class="fa fa-product-hunt" aria-hidden="true"></i><span>{{__('Products')}}</span><span class="pull-right-container">
+                    <i class="fa fa-product-hunt" aria-hidden="true"></i><span>{{__('Products')}}</span><span
+                            class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ (Route::currentRouteName() == 'product_view')? 'active': '' }}"><a href="{{route("product_view")}}">{{__('All Products')}}</a></li>
-                    <li class="{{ (Route::currentRouteName() == 'product_add')? 'active': '' }}"><a href="{{route("product_add")}}">{{__('Add New')}}</a></li>
-                    <li class="{{ (Route::currentRouteName() == 'categories_view')||(Route::currentRouteName() == 'categories_add')? 'active': '' }}"><a href="{{route
+                    <li class="{{ (Route::currentRouteName() == 'product_view')? 'active': '' }}"><a
+                                href="{{route("product_view")}}">{{__('All Products')}}</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'product_add')? 'active': '' }}"><a
+                                href="{{route("product_add")}}">{{__('Add New')}}</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'categories_view')||(Route::currentRouteName() == 'categories_add')? 'active': '' }}">
+                        <a href="{{route
                     ("categories_view")}}">{{__('Categories')}}</a></li>
 
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview  {{ (Route::currentRouteName() == 'size_view')
+            ||(Route::currentRouteName() == 'size_add')
+            ||(Route::currentRouteName() == 'size_view')?
+            'active': '' }}">
                 <a href="#">
-                    <i class="fa fa-table"></i> <span>Tables</span>
+                    <i class="fa fa-table"></i> <span>Size Guides</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                    <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'size_view')? 'active': '' }}"><a
+                                href="{{route('size_view')}}">{{__('All size guides')}}</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'size_add')? 'active': '' }}"><a
+                                href="{{route('size_add')}}">{{__('Add New')}}</a></li>
                 </ul>
             </li>
 
