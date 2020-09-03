@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Brands;
+use App\Categories;
+use App\Color;
+use App\Products;
+use App\size;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,78 +23,86 @@ class ProductsController extends Controller
 
     public function add()
     {
-//        $categories = categories::all();
-//        $subcategories = subcategories::all();
-//        $brands = brands::all();
-        return view('layouts.admin.storemanagment.products.product_add');
+
+ $brands = Brands::all();
+ $colors = Color::all();
+ $sizes = size::all();
+ $categories= Categories::all();
+ $tags= Tag::all();
+        return view('layouts.admin.storemanagment.products.product_add',compact('brands','colors','sizes','categories','tags'));
     }
 
-    public function store(productRequest $request)
-    {
-        $slider = null;
-        try {
-            $image = $request->file('image');
-            $fileEx = $image->getClientOriginalName();
-            $fileName = date('Y-m-d') . $fileEx;
-            Image::make($image)->resize(350, 350)->save(public_path('upload/products/') . $fileName);
-            $gallery = [];
-            if ($request->hasFile('files')) {
 
-                $images = $request->file('files');
-                $i = 0;
-                foreach ($images as $image) {
-                    $fileEx = $image->getClientOriginalName();
-                    $imageName = date('Y-m-d') . $i . '.' . $fileEx;
-                    Image::make($image)->resize(350, 350)->save(public_path('upload/products/') . $imageName);
-                    array_push($gallery, $imageName);
-                    $i++;
-                }
-            }
-//            $image->move(public_path('upload/sliders/'), $fileName);
-            $product = Product::create([
-                'cat_id' => $request->cat_id,
-                'sub_cat_id' => $request->sub_cat_id,
-                'brand_id' => $request->brand_id,
-                'product_name' => $request->product_name,
-                'slug' => slugify($request->product_name),
-                'model' => $request->model,
-                'color' => $request->color,
-                'size' => $request->size,
-                'buying_price' => $request->buying_price,
-                'selling_price' => $request->selling_price,
-                'special_price' => $request->special_price,
-                'special_start' => $request->special_start,
-                'special_end' => $request->special_end,
-                'quantity' => $request->quantity,
-                'warranty' => $request->warranty,
-                'warranty_duration' => $request->warranty_duration,
-                'warranty_condition' => $request->warranty_condition,
-                'video_url' => $request->video_url,
-                'image' => $fileName,
-                'galleary' => json_encode($gallery),
-                'description' => $request->description,
-                'long_description' => $request->long_description,
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'product_name' => ['required','unique:Products,product_name'],
+        ]);
+        $products= null;
+        try {
+            $product_name = $request->product_name;
+            $products = Products::create([
+                'cat_id' =>$request->cat_id,
+                'color_id' =>$request->color_id,
+                'brand_id' =>$request->brand_id,
+                'size_id' =>$request->size_id,
+                'tags_id' =>$request->tags_id,
+                'product_name' => $product_name,
+                'product_slug' => slugify($product_name),
+                'description' =>$request->description,
+                'regular_price' =>$request->regular_price,
+                'sale_price' =>$request->sale_price,
+                'sale_date_start' =>$request->sale_date_start,
+                'sale_date_end' =>$request->sale_date_end,
+                'product_model' =>$request->product_model,
+                'product_code' =>$request->product_code,
+                'product_status' =>$request->product_status,
+                'product_weight' =>$request->product_weight,
+                'product_description' =>$request->product_description,
+                'quantity' =>$request->quantity,
+                'warranty' =>$request->warranty,
+                'warranty_duration' =>$request->warranty_duration,
+                'warranty_condition' =>$request->warranty_condition,
+                'video_url' =>$request->video_url,
                 'status' => $request->status,
 
             ]);
+            if ($request->file('featured_image')) {
+                $file = $request->file('featured_image');
+                @unlink(public_path('upload/store_managment/products/' . $products->featured_image));
+                $filename = date('YmdHi') . $file->getClientOriginalName();
+                $file->move(public_path('upload/store_managment/products'), $filename);
+                $products['featured_image'] = $filename;
+          }
+            if($request->hasfile('product_gallery'))
+            {
 
-            // dd($product);
-//            if ($request->file('brand_logo')) {
-//                $file = $request->file('brand_logo');
-//                @unlink(public_path('upload/store_managment/brands_logo/' . $slider->brand_logo));
-//                $filename = date('YmdHi') . $file->getClientOriginalName();
-//                $file->move(public_path('upload/store_managment/brands_logo'), $filename);
-//                $slider['brand_logo'] = $filename;
+                foreach($request->file('product_gallery') as $file)
+                {
+                    $name=$file->getClientOriginalName();
+                    $file->move(public_path().'/upload/store_managment/products/', $name);
+                    $data[] = $name;
+                }
+            }
+
+            $file= new Products();
+            $file->product_gallery=json_encode($data);
+
+//            $files=$request->file('product_gallery');
+//            $count=1;
+//            foreach ($files as $file)
+//            {
+//             $filename=$count . "jpg";
+//             $file->move(public_path('upload/store_managment/products'),$filename);
+//                $count++;
 //            }
-//            $slider->save();
-
-
+            return $products;
+            $products->save();
         } catch (Exception $exception) {
-            dd($exception);
-            $product = false;
+            $products = false;
         }
-        if ($product == true) {
-            return redirect()->route('product_view')->with('success', ' Product has been successfully created !');
+        if ($products == true) {
+            return redirect()->route('product_view')->with('success', 'Product has been successfully created !');
         } else {
             return back()->with('error', 'Oops! Unable to create a Product ');
         }

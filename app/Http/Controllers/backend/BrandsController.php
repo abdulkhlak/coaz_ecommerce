@@ -14,7 +14,7 @@ class BrandsController extends Controller
 //        $brands = brands::get();
 //        return view('layouts.admin.storemanagment.brands.brand_view',compact('brands'));
         $brands = brands::get();
-        return view('layouts.admin.storemanagment.brands.brand_', compact('brands'));
+        return view('layouts.admin.storemanagment.brands.brand_view', compact('brands'));
     }
 
     public function add()

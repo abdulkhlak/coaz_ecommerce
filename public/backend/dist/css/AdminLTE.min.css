@@ -5613,3 +5613,53 @@ hr {
     max-width: 180px;
     margin-top: 16px;
 }
+
+.list-group{
+    max-height: 300px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+    border: none;
+}
+#result_panel{
+    margin-top: 30px;
+}
+.panel-custom{
+    color: rgb(255 255 255);
+    /* background-color: rgb(51 122 183); */
+    border-color: rgb(51 122 183);
+    padding: 15px;
+}
+}
+input[type="file"] {
+    display: block;
+}
+.imageThumb {
+    max-height: 75px;
+    border: 2px solid;
+    padding: 1px;
+    cursor: pointer;
+}
+.pip {
+    display: inline-block;
+    margin: 10px 10px 0 0;
+}
+.remove {
+    display: block;
+    background: #444;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+.remove:hover {
+    background: white;
+    color: black;
+}
+.sale_schedule{
+    text-decoration: underline;
+    padding-top: 10px;
+}
+.sale_schedule:hover{
+    text-decoration: underline;
+    padding-top: 10px;
+}

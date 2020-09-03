@@ -85,6 +85,7 @@
 <script src="{{asset('backend/dist/js/adminlte.min.js')}}"></script>
 <script src="{{asset('backend/dist/js/pages/dashboard.js')}}"></script>
 <script src="{{asset('backend/dist/js/demo.js')}}"></script>
+<script src="{{asset('backend/dist/js/custom.js')}}"></script>
 <script type="text/javascript" src="{{asset('backend')}}/plugins/bootstrap-switch/bootstrap-switch.min.js"></script>
 <!-- DataTables -->
 <script src="{{asset("backend")}}/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -100,6 +101,8 @@
 @endif
 <!-- sweet alert script -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- CK Editor -->
+<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 <script>
     $(function () {
         $(document).on('click', '#delete', function (e) {

@@ -70,7 +70,7 @@ class SizeController extends Controller
     public function update(Request $request , $id)
     {
         $this->validate($request, [
-            'size_name' => ['required', 'unique:Sizes,size_name'],
+            "size_name" => "required| unique:Sizes,size_name,".$id,
         ]);
         $size = size::find($id);
         $success= null;

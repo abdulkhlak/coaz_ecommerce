@@ -11,189 +11,206 @@
             <li class="active">{{__('Product add')}}</li>
         </ol>
     </section>
-    <section class="content">
+    <section class="content ">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                        <!-- left column -->
+                    <form method="post" action="{{route('product_store')}}" id="productform" enctype="multipart/form-data">
+                    @csrf
+                        <!-- product  colum -->
                         <div class="col-md-12">
-                            <form method="post" action="{{route('categories_store')}}" id="brandform" enctype="multipart/form-data">
-                                @csrf
+
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="category_name" name="category_name"
+                                        <label for="product_name">{{__('Product name')}}</label>
+                                        <input type="text" class="form-control" id="product_name" name="product_name"
                                                placeholder="Product Name">
                                     </div>
                                     <div class="form-group">
-                                        <label for="cat_desc">{{__('Description')}}</label><br/>
-                                        <textarea class="" name="category_desc" id="category_desc" rows="5" cols="100"></textarea>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-sm-3 col-md-4 col-lg-3">
-                                            <div class="form-wizard condensed mgbt-xs-20">
-                                                <ul class="nav nav-tabs nav-stacked">
-                                                    <li class="active"><a href="#tabinfo" data-toggle="tab"> <i class="fas fa-wrench"></i> Genarel </a></li>
-                                                    <li><a href="#tabship" data-toggle="tab"> <i class="fa fa-truck append-icon"></i> Shipping</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-9 col-md-8 col-lg-9 tab-right">
-                                            <div class="panel widget panel-bd-left light-widget">
-                                                <div class="panel-heading no-title"> </div>
-                                                <div  class="panel-body">
-                                                    <div class="tab-content no-bd mgbt-xs-20">
-                                                        <div id="tabinfo" class="tab-pane active">
-                                                            <form class="form-horizontal">
-                                                                <!-- form-group -->
-
-                                                                <div class="form-group">
-                                                                    <label for="name_1" class="control-label col-lg-3 required"> <span title="" data-toggle="tooltip" class="label-tooltip" > Regular price (৳ ) </span> </label>
-                                                                    <div class="col-lg-8">
-                                                                        <div class="row mgbt-xs-0">
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" required  name="name_1" class="  updateCurrentText " id="name_1" >
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label for="name_1" class="control-label col-lg-3 required"> <span title="" data-toggle="tooltip" class="label-tooltip" > Sale price (৳ )</span> </label>
-                                                                    <div class="col-lg-8">
-                                                                        <div class="row mgbt-xs-0">
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" required  name="name_1" class="  updateCurrentText " id="name_1" >
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label for="name_1" class="control-label col-lg-3 required">
-                                                                        <span title="" data-toggle="tooltip" class="label-tooltip" >
-                                                                            Sale price dates</span> </label>
-                                                                    <div class="col-lg-8">
-                                                                        <div class="row mgbt-xs-0">
-                                                                            <div class="col-sm-9">
-                                                                                <input type="date" required  name="name_1" class="
-                                                                                updateCurrentText " id="name_1" >
-                                                                            </div>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="date" required  name="name_1" class="
-                                                                                updateCurrentText " id="name_1" >
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <!-- form-group -->
-
-                                                            </form>
-                                                        </div>
-
-
-
-                                                        <div id="tabship" class="tab-pane">
-                                                            <h3 class="mgtp-15 mgbt-xs-20"> Shipping</h3>
-                                                            <form class="form-horizontal">
-                                                                <div class="form-group">
-                                                                    <label for="width" class="control-label col-lg-3"> Package width</label>
-                                                                    <div class=" col-lg-2">
-                                                                        <div class="input-group"> <span class="input-group-addon">in</span>
-                                                                            <input type="text" onkeyup="if (isArrowKey(event)) return ;this.value = this.value.replace(/,/g, '.');" value="0.000000" name="width" id="width" maxlength="14">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="height" class="control-label col-lg-3"> Package height</label>
-                                                                    <div class="col-lg-2">
-                                                                        <div class="input-group"> <span class="input-group-addon">in</span>
-                                                                            <input type="text" onkeyup="if (isArrowKey(event)) return ;this.value = this.value.replace(/,/g, '.');" value="0.000000" name="height" id="height" maxlength="14">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="depth" class="control-label col-lg-3"> Package depth</label>
-                                                                    <div class="col-lg-2">
-                                                                        <div class="input-group"> <span class="input-group-addon">in</span>
-                                                                            <input type="text" onkeyup="if (isArrowKey(event)) return ;this.value = this.value.replace(/,/g, '.');" value="0.000000" name="depth" id="depth" maxlength="14">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="weight" class="control-label col-lg-3"> Package weight</label>
-                                                                    <div class="col-lg-2">
-                                                                        <div class="input-group"> <span class="input-group-addon">lb</span>
-                                                                            <input type="text" onkeyup="if (isArrowKey(event)) return ;this.value = this.value.replace(/,/g, '.');" value="0.000000" name="weight" id="weight" maxlength="14">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="weight" class="control-label col-lg-3">Carriers</label>
-                                                                    <div class="col-lg-9">
-                                                                        <div class="row">
-                                                                            <div class="col-sm-6">
-                                                                                <div class="vd_checkbox checkbox-success">
-                                                                                    <input type="checkbox" id="checkbox-1" value="DHL">
-                                                                                    <label for="checkbox-1"> DHL </label>
-                                                                                </div>
-                                                                                <div class="vd_checkbox checkbox-success">
-                                                                                    <input type="checkbox" id="checkbox-2" value="Fedex">
-                                                                                    <label for="checkbox-2"> Fedex </label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <div class="vd_checkbox checkbox-success">
-                                                                                    <input type="checkbox" id="checkbox-3" value="My Courier">
-                                                                                    <label for="checkbox-3"> My Courier </label>
-                                                                                </div>
-                                                                                <div class="vd_checkbox checkbox-success">
-                                                                                    <input type="checkbox" id="checkbox-4" value="Post">
-                                                                                    <label for="checkbox-4"> Post </label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-
-                                                    </div>
-                                                    <!-- tab-content -->
-
-                                                </div>
-                                                <!-- panel-body -->
-
-                                                <!-- form-horizontal -->
-                                            </div>
-                                            <!-- Panel Widget -->
-                                        </div>
-                                        <!-- col-sm-12-->
+                                        <label for="product_slug">{{__('Product slug')}}</label>
+                                        <input type="text" class="form-control" id="product_slug" name="product_slug"
+                                               placeholder="Product slug">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="cat_desc">{{__('Category status')}}</label><br/>
-                                        <select class="form-control"  name="status" style="width: 30%;">
-                                            <option selected disabled> {{__('Status')}}</option>
-                                            <option value="1">{{__('Active')}}</option>
-                                            <option value="0">{{__('Inactive')}}</option>
+                                        <label for="description">{{__('Description')}}</label>
+                                        <textarea class="form-control" id="editor1" name="description"
+                                                  placeholder="description" rows="5" cols="100"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="regular_price">{{__('regular price')}}</label>
+                                        <input type="text" class="form-control" id="regular_price" name="regular_price"
+                                               placeholder="৳ 00.00">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sale_price">{{__('sale  price')}}</label>
+                                        <input type="text" class="form-control" id="sale_price" name="sale_price"
+                                               placeholder="৳ 00.00">
+                                        <a href="#" class="sale_schedule" id="sale_schedule" style="display: inline;">Schedule</a>
+                                    </div>
+
+                                    <div class="sale_price_date" id="sale_price_date" style="display:none;">
+                                        <label for="regular_price">{{__('sale price dates')}}</label>
+                                    <div class="form-group">
+                                        <label for="sale_date_start">{{__('FORM')}}</label>
+                                        <input type="date" class="form-control" name="sale_date_start" id="sale_date_start"
+                                               placeholder=" Form...YYYY-MM-DD " value=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sale_date_end">{{__('TO')}}</label>
+                                        <input type="date" class="form-control" name="sale_date_end" id="sale_date_end"
+                                               placeholder=" To...YYYY-MM-DD " value=""/>
+                                    </div>
+                                    </div> <!-- sale price date div -->
+                                    <div class="form-group">
+                                        <label for="product_model">{{__('Product model')}}</label>
+                                        <input type="text" class="form-control" id="product_model" name="product_model"
+                                               placeholder="Product model">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product_code">{{__('Product code')}}</label>
+                                        <input type="text" class="form-control" id="product_code" name="product_code"
+                                               placeholder="Product code">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product_status">{{__('product status')}}</label>
+                                        <select name="product_status" class="form-control">
+                                            <option disabled selected >status</option>
+                                            <option value="1">New</option>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="product_weight">{{__('product weight')}}</label>
+                                        <input type="text" class="form-control" id="product_weight" name="product_weight"
+                                               placeholder="Product weight">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="cat_id">{{__('product categories')}}</label>
+                                            <select name="cat_id" class="form-control">
+                                                <option disabled selected >status</option>
+                                                @foreach($categories as $category)
+
+
+                                                    @include('layouts.admin.partials._category',['category' => $category,'level'=>0])
+
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="brand_id">{{__('product brand')}}</label>
+                                            <select name="brand_id" class="form-control">
+                                                <option disabled selected >brand select</option>
+                                                @foreach($brands as $brand)
+                                                <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
+                                                    @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="color_id">{{__('product color')}}</label>
+                                            <select name="color_id" class="form-control">
+                                                <option disabled selected >color</option>
+                                                @foreach($colors as $color)
+                                                    <option value="{{$color->id}}">{{$color->color_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="size_id">{{__('product size')}}</label>
+                                            <select name="size_id" class="form-control">
+                                                <option disabled selected >size</option>
+                                                @foreach($sizes as $size)
+                                                    <option value="{{$size->id}}">{{$size->size_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group">
+                                        <label for="product_description">{{__('product description')}}</label>
+                                        <textarea class="form-control" id="editor2" name="product_description"
+                                                  placeholder="description" rows="5" cols="100"></textarea>
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label for="tags_id">{{__('product tags')}}</label>
+                                        <select name="tags_id" class="form-control">
+                                            <option disabled selected >size</option>
+                                            @foreach($tags as $tag)
+                                                <option value="{{$tag->id}}">{{$tag->tag_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <!-- radio -->
+                                    <div class="form-group">
+                                        <label for="warranty" class="control-label">{{__('Warranty')}}</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="warranty" id="warranty" value="1" checked>
+                                                {{__('Yes')}}
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="warranty" id="warranty_2" value="0">
+                                                {{__('No')}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="warranty-box" style="display:none;" >
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="warranty" class="control-label">{{__('warranty duration')}}</label>
+                                                <input type="text" class="form-control" name="warranty_duration" id="warranty_duration"
+                                                       placeholder="warranty duration" value=""/>
+                                                <font style="color: red">{{($errors->has('warranty_duration'))?($errors->first('warranty_duration')):''}}</font>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>warranty condition </label>
+                                                <textarea class="form-control"
+                                                          name="warranty_condition"placeholder="description" rows="5" cols="100"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="video_url">{{__('video url')}}</label>
+                                        <input type="url" class="form-control" name="video_url" id="video_url"
+                                               placeholder="video url" value=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="featured_image">{{__('featured image')}}</label>
                                         <div class="imagepreview">
                                             <h5>{{__('Image preview for this value')}}</h5>
                                             <p class="cat_p_desc">{{__('Upload an image')}}</p>
                                         <img id="preview" src="">
                                         <div class="file-input">
-                                            <input class="choose" type="file" name="category_logo" accept="image/*">
+                                            <input class="choose" type="file" name="featured_image">
                                             <span class="button">{{__('Upload')}}</span>
                                         </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product_gallery">{{__('product gallery')}}</label>
+                                        <div class="field" align="left">
+                                            <input type="file" id="files" multiple name="product_gallery[]"  />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control"  name="status" style="width: 100%;">
+                                            <option selected disabled> Status</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
                                     </div>
 
                                 </div><!-- /.box-body -->
@@ -201,15 +218,70 @@
                                 <div class="box-footer">
                                     <button type="submit" class="btn btn-primary">{{__('Add new Category ')}}</button>
                                 </div>
-                            </form>
 
 
-                        </div><!--/.col (left) -->
 
+                        </div><!--/.col (product colum) -->
+                    </form>
                 </div><!-- /.box -->
+
 
 
             </div><!-- /.col -->
         </div><!-- /.row -->
     </section><!-- /.content -->
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            if (window.File && window.FileList && window.FileReader) {
+                $("#files").on("change", function(e) {
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            $("<span class=\"pip\">" +
+                                "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                                "<br/><span class=\"remove\">Remove image</span>" +
+                                "</span>").insertAfter("#files");
+                            $(".remove").click(function(){
+                                $(this).parent(".pip").remove();
+                            });
+
+                            // Old code here
+                            /*$("<img></img>", {
+                              class: "imageThumb",
+                              src: e.target.result,
+                              title: file.name + " | Click to remove"
+                            }).insertAfter("#files").click(function(){$(this).remove();});*/
+
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                    console.log(files);
+                });
+            } else {
+                alert("Your browser doesn't support to File API")
+            }
+        });
+    </script>
+    <script>
+        $(function () {
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace('editor1');
+            //bootstrap WYSIHTML5 - text editor
+            $(".textarea").wysihtml5();
+        });
+        $(function () {
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace('editor2');
+            //bootstrap WYSIHTML5 - text editor
+            $(".textarea").wysihtml5();
+        });
+    </script>
 @endsection

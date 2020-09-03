@@ -47,6 +47,20 @@ Route::group(['prefix' => 'categories',  'middleware' => 'auth'], function()
 
 });
 
+// TAGS OUTE
+
+Route::group(['prefix' => 'tag',  'middleware' => 'auth'], function()
+{
+    Route::get('/view','Backend\TagController@view')->name('tag_view');
+    Route::get('/add','Backend\TagController@add')->name('tag_add');
+    Route::post('/store','Backend\TagController@store')->name('tag_store');
+    Route::get('/tagStatus/{id}/{s}','Backend\TagController@tagStatus')->name('tag_status');
+    Route::get('/edit/{id}','Backend\TagController@edit')->name('tag_edit');
+    Route::post('/update/{id}','Backend\TagController@update')->name('tag_update');
+    Route::get('/delete/{id}','Backend\TagController@delete')->name('tag_delete');
+
+});
+
 // SIZE ROUTE
 
 Route::group(['prefix' => 'size',  'middleware' => 'auth'], function()
@@ -58,6 +72,20 @@ Route::group(['prefix' => 'size',  'middleware' => 'auth'], function()
     Route::get('/edit/{id}','Backend\SizeController@edit')->name('size_edit');
     Route::post('/update/{id}','Backend\SizeController@update')->name('size_update');
     Route::get('/delete/{id}','Backend\SizeController@delete')->name('size_delete');
+
+});
+
+// COLOR ROUTE
+
+Route::group(['prefix' => 'color',  'middleware' => 'auth'], function()
+{
+    Route::get('/view','Backend\ColorController@view')->name('color_view');
+    Route::get('/add','Backend\ColorController@add')->name('color_add');
+    Route::post('/store','Backend\ColorController@store')->name('color_store');
+    Route::get('/categoryStatus/{id}/{s}','Backend\ColorController@colorStatus')->name('color_status');
+    Route::get('/edit/{id}','Backend\ColorController@edit')->name('color_edit');
+    Route::post('/update/{id}','Backend\ColorController@update')->name('color_update');
+    Route::get('/delete/{id}','Backend\ColorController@delete')->name('color_delete');
 
 });
 // PRODUCT ROUTE
