@@ -10,6 +10,9 @@ use App\size;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Image;
+use App\Models\File;
+
 
 class ProductsController extends Controller
 {
@@ -40,6 +43,7 @@ class ProductsController extends Controller
         ]);
         $products= null;
         try {
+
             $product_name = $request->product_name;
             $products = Products::create([
                 'cat_id' =>$request->cat_id,
@@ -67,37 +71,32 @@ class ProductsController extends Controller
                 'status' => $request->status,
 
             ]);
+
             if ($request->file('featured_image')) {
                 $file = $request->file('featured_image');
                 @unlink(public_path('upload/store_managment/products/' . $products->featured_image));
                 $filename = date('YmdHi') . $file->getClientOriginalName();
                 $file->move(public_path('upload/store_managment/products'), $filename);
-                $products['featured_image'] = $filename;
+                $products->featured_image = $filename;
           }
-            if($request->hasfile('product_gallery'))
+            //  Handle multiple file upload
+            $gallery=[];
+            if ($request->hasFile('product_gallery'))
             {
-
-                foreach($request->file('product_gallery') as $file)
+                foreach ($request->file('product_gallery')as $image_gallary)
                 {
-                    $name=$file->getClientOriginalName();
-                    $file->move(public_path().'/upload/store_managment/products/', $name);
-                    $data[] = $name;
+                    $name=time().'.'.$image_gallary->getClientOriginalName();
+                    $image_gallary->move(public_path('upload/store_managment/products'),$name);
+                    array_push($gallery,$name);
                 }
             }
-
-            $file= new Products();
-            $file->product_gallery=json_encode($data);
-
-//            $files=$request->file('product_gallery');
-//            $count=1;
-//            foreach ($files as $file)
-//            {
-//             $filename=$count . "jpg";
-//             $file->move(public_path('upload/store_managment/products'),$filename);
-//                $count++;
-//            }
-            return $products;
+            $products->product_gallery=implode(',',$gallery);
+//            dd($products);
+//            return $products;
             $products->save();
+
+
+
         } catch (Exception $exception) {
             $products = false;
         }

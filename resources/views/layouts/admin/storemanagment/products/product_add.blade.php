@@ -140,8 +140,8 @@
 
                                     <div class="form-group">
                                         <label for="tags_id">{{__('product tags')}}</label>
-                                        <select name="tags_id" class="form-control">
-                                            <option disabled selected >size</option>
+                                        <select name="tags_id" class="form-control select2" >
+
                                             @foreach($tags as $tag)
                                                 <option value="{{$tag->id}}">{{$tag->tag_name}}</option>
                                             @endforeach
