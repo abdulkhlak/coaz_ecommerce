@@ -17,9 +17,6 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('cat_id');
             $table->unsignedBigInteger('brand_id')->nullable();
-            $table->unsignedBigInteger('color_id')->nullable();
-            $table->unsignedBigInteger('size_id')->nullable();
-            $table->unsignedBigInteger('tags_id')->nullable();
             $table->string('product_name');
             $table->string('product_slug')->unique();
             $table->longText('description')->nullable();
@@ -37,7 +34,6 @@ class CreateProductsTable extends Migration
             $table->longText('warranty_condition')->nullable();
             $table->string('video_url')->nullable();
             $table->string('featured_image')->nullable();
-            $table->string('product_gallery')->nullable();
             $table->enum('status',['1','0'])->default('1');
             $table->timestamps();
         });

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Brands;
 use App\Categories;
 use App\Color;
+use App\Product_image_gallery;
+use App\Product_tags;
 use App\Products;
 use App\size;
 use App\Tag;
@@ -19,8 +21,9 @@ class ProductsController extends Controller
 
     public function view()
     {
-//        $products = Product::get();
-        return view('backend.storemanagment.products.product_view');
+       $products = Products::with('category')->get();
+       $product_tags= Product_tags::with('tags')->get();
+        return view('layouts.admin.storemanagment.products.product_view',compact('products','product_tags'));
 
     }
 
@@ -30,7 +33,10 @@ class ProductsController extends Controller
  $brands = Brands::all();
  $colors = Color::all();
  $sizes = size::all();
- $categories= Categories::all();
+        $categories = Categories::with('allChild')
+            ->where('status','=',1)
+            ->where('parent_id','=',0)
+            ->get();
  $tags= Tag::all();
         return view('layouts.admin.storemanagment.products.product_add',compact('brands','colors','sizes','categories','tags'));
     }
@@ -47,10 +53,7 @@ class ProductsController extends Controller
             $product_name = $request->product_name;
             $products = Products::create([
                 'cat_id' =>$request->cat_id,
-                'color_id' =>$request->color_id,
                 'brand_id' =>$request->brand_id,
-                'size_id' =>$request->size_id,
-                'tags_id' =>$request->tags_id,
                 'product_name' => $product_name,
                 'product_slug' => slugify($product_name),
                 'description' =>$request->description,
@@ -72,6 +75,7 @@ class ProductsController extends Controller
 
             ]);
 
+
             if ($request->file('featured_image')) {
                 $file = $request->file('featured_image');
                 @unlink(public_path('upload/store_managment/products/' . $products->featured_image));
@@ -79,21 +83,56 @@ class ProductsController extends Controller
                 $file->move(public_path('upload/store_managment/products'), $filename);
                 $products->featured_image = $filename;
           }
-            //  Handle multiple file upload
-            $gallery=[];
-            if ($request->hasFile('product_gallery'))
-            {
-                foreach ($request->file('product_gallery')as $image_gallary)
-                {
-                    $name=time().'.'.$image_gallary->getClientOriginalName();
-                    $image_gallary->move(public_path('upload/store_managment/products'),$name);
-                    array_push($gallery,$name);
-                }
-            }
-            $products->product_gallery=implode(',',$gallery);
-//            dd($products);
-//            return $products;
+
+
             $products->save();
+            if ($products->save())
+            {
+                $files= $request->product_gallery;
+                if (!empty($files))
+                {
+                    foreach ($files as $file)
+                    {
+                        $imageName=date('Ymd').$file->getClientOriginalName();
+                        $file->move('upload/store_managment/products/',$imageName);
+                        $product_gallery['product_gallery']=$imageName;
+                        $product_gallery= new Product_image_gallery();
+                            $product_gallery->product_id=$products->id;
+                            $product_gallery->product_gallery=$imageName;
+                        $product_gallery->save();
+
+                    }
+                }
+                $tags=$request->tags_id;
+                if (!empty($tags))
+                {
+                    foreach ($tags as $tag)
+                    {
+                        $tags_= new Product_tags();
+                        $tags_->product_id=$products->id;
+                        $tags_->tag_id=$tag;
+                        $tags_->save();
+                    }
+                }
+
+            }
+            //  Handle multiple file upload
+//            $gallery=[];
+//            if ($request->hasFile('product_gallery'))
+//            {
+//                foreach ($request->file('product_gallery')as $image_gallary)
+//                {
+//                    $name=time().'.'.$image_gallary->getClientOriginalName();
+//                    $image_gallary->move(public_path('upload/store_managment/products'),$name);
+//                    array_push($gallery,$name);
+//                }
+//            }
+//            // $products->product_gallery=implode(',',$gallery);
+////            dd($products);
+////
+////            return $products;
+
+
 
 
 

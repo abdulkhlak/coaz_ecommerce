@@ -28,4 +28,8 @@ class Categories extends Model
         $this->attributes['category_name'] = $value;
         $this->attributes['category_slug'] = str_slug($value);
     }
+    public function products()
+    {
+        return $this->hasMany(Products::class);
+    }
 }

@@ -12,4 +12,18 @@ class Products extends Model
         'product_model','product_code','product_status','product_weight','cat_id','brand_id','color_id',
         'size_id','product_description','tags_id','warranty','warranty_duration','warranty_condition','video_url',
         'featured_image','product_gallery','status'];
+
+    // category reationship
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class,'cat_id');
+    }
+
+    // tag reationship
+
+    public function tags()
+    {
+        return $this->belongsTo(Tag::class,'tags_id');
+    }
 }

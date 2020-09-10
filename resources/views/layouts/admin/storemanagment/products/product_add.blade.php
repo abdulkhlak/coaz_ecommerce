@@ -75,8 +75,8 @@
                                     <div class="form-group">
                                         <label for="product_status">{{__('product status')}}</label>
                                         <select name="product_status" class="form-control">
-                                            <option disabled selected >status</option>
-                                            <option value="1">New</option>
+                                            <option disabled selected >{{__('status')}}</option>
+                                            <option value="1">{{__('New')}}</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -87,13 +87,10 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="cat_id">{{__('product categories')}}</label>
-                                            <select name="cat_id" class="form-control">
-                                                <option disabled selected >status</option>
+                                            <select name="cat_id"  class="form-control" id="category">
+                                                <option value="0" selected >{{__('None')}}</option>
                                                 @foreach($categories as $category)
-
-
                                                     @include('layouts.admin.partials._category',['category' => $category,'level'=>0])
-
                                                 @endforeach
                                             </select>
                                         </div>
@@ -140,7 +137,7 @@
 
                                     <div class="form-group">
                                         <label for="tags_id">{{__('product tags')}}</label>
-                                        <select name="tags_id" class="form-control select2" >
+                                        <select name="tags_id[]" multiple class="form-control select2" >
 
                                             @foreach($tags as $tag)
                                                 <option value="{{$tag->id}}">{{$tag->tag_name}}</option>
