@@ -147,7 +147,8 @@
 
 <!-- Select2 -->
 <script src="{{asset("backend")}}/plugins/select2/select2.full.min.js"></script>
-
+<!-- validation script -->
+<script src="{{asset('backend/dist/js/jquery.form.validate.js')}}"></script>
 <!-- Page script -->
 <script>
     $(function () {
@@ -211,6 +212,7 @@
         });
     });
 </script>
+
 
 @yield('scripts')
 </body>

@@ -24,6 +24,16 @@ class Products extends Model
 
     public function tags()
     {
-        return $this->belongsTo(Tag::class,'tags_id');
+        return $this->belongsToMany(Tag::class,'product_tags','product_id','tag_id');
+    }
+    // size reationship
+    public function sizes()
+    {
+        return $this->belongsToMany(size::class,'product_sizes','product_id','size_id');
+    }
+    // color reationship
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class,'product_colors','product_id','color_id');
     }
 }

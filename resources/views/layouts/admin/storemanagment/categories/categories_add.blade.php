@@ -24,6 +24,7 @@
                                 <div class="form-group">
                                     <label for="cat_name">{{__('Name')}}</label>
                                     <input type="text" class="form-control" id="category_name" name="category_name">
+                                    <font style="color: red">{{($errors->has('category_name'))?($errors->first('category_name')):''}}</font>
                                     <p class="cat_p_desc">{{__('The name is how it appears on your site.')}}</p>
                                 </div>
                                 <!-- Parent category content -->

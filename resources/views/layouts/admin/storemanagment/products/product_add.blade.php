@@ -25,6 +25,7 @@
                                         <label for="product_name">{{__('Product name')}}</label>
                                         <input type="text" class="form-control" id="product_name" name="product_name"
                                                placeholder="Product Name">
+                                        <font style="color: red">{{($errors->has('product_name'))?($errors->first('product_name')):''}}</font>
                                     </div>
                                     <div class="form-group">
                                         <label for="product_slug">{{__('Product slug')}}</label>
@@ -41,6 +42,7 @@
                                         <label for="regular_price">{{__('regular price')}}</label>
                                         <input type="text" class="form-control" id="regular_price" name="regular_price"
                                                placeholder="৳ 00.00">
+                                        <font style="color: red">{{($errors->has('regular_price'))?($errors->first('regular_price')):''}}</font>
                                     </div>
                                     <div class="form-group">
                                         <label for="sale_price">{{__('sale  price')}}</label>
@@ -76,7 +78,9 @@
                                         <label for="product_status">{{__('product status')}}</label>
                                         <select name="product_status" class="form-control">
                                             <option disabled selected >{{__('status')}}</option>
+                                            <option value="0">{{__('None')}}</option>
                                             <option value="1">{{__('New')}}</option>
+
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -109,8 +113,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="color_id">{{__('product color')}}</label>
-                                            <select name="color_id" class="form-control">
-                                                <option disabled selected >color</option>
+                                            <select name="color_id[]" multiple class="form-control select2">
                                                 @foreach($colors as $color)
                                                     <option value="{{$color->id}}">{{$color->color_name}}</option>
                                                 @endforeach
@@ -120,8 +123,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="size_id">{{__('product size')}}</label>
-                                            <select name="size_id" class="form-control">
-                                                <option disabled selected >size</option>
+                                            <select name="size_id[]" multiple class="form-control select2">
                                                 @foreach($sizes as $size)
                                                     <option value="{{$size->id}}">{{$size->size_name}}</option>
                                                 @endforeach
@@ -149,13 +151,13 @@
                                         <label for="warranty" class="control-label">{{__('Warranty')}}</label>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="warranty" id="warranty" value="1" checked>
+                                                <input type="radio" name="warranty" id="warranty" value="1" >
                                                 {{__('Yes')}}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="warranty" id="warranty_2" value="0">
+                                                <input type="radio" name="warranty" id="warranty_2" value="0" checked>
                                                 {{__('No')}}
                                             </label>
                                         </div>
@@ -281,4 +283,5 @@
             $(".textarea").wysihtml5();
         });
     </script>
+
 @endsection

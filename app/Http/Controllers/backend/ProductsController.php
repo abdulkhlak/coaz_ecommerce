@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Brands;
 use App\Categories;
 use App\Color;
+use App\Product_color;
 use App\Product_image_gallery;
+use App\Product_size;
 use App\Product_tags;
 use App\Products;
 use App\size;
@@ -21,9 +23,10 @@ class ProductsController extends Controller
 
     public function view()
     {
-       $products = Products::with('category')->get();
-       $product_tags= Product_tags::with('tags')->get();
-        return view('layouts.admin.storemanagment.products.product_view',compact('products','product_tags'));
+       $products = Products::with('category','tags','sizes','colors')->get();
+      // dd($products);
+
+        return view('layouts.admin.storemanagment.products.product_view',compact('products'));
 
     }
 
@@ -46,6 +49,7 @@ class ProductsController extends Controller
     {
         $this->validate($request, [
             'product_name' => ['required','unique:Products,product_name'],
+            'regular_price' => ['required'],
         ]);
         $products= null;
         try {
@@ -103,6 +107,8 @@ class ProductsController extends Controller
 
                     }
                 }
+
+                // tags
                 $tags=$request->tags_id;
                 if (!empty($tags))
                 {
@@ -112,6 +118,32 @@ class ProductsController extends Controller
                         $tags_->product_id=$products->id;
                         $tags_->tag_id=$tag;
                         $tags_->save();
+                    }
+                }
+
+                // Size
+                $sizes=$request->size_id;
+                if (!empty($sizes))
+                {
+                    foreach ($sizes as $size)
+                    {
+                        $size_= new Product_size();
+                        $size_->product_id=$products->id;
+                        $size_->size_id=$size;
+                        $size_->save();
+                    }
+                }
+
+                // Color
+                $colors=$request->color_id;
+                if (!empty($colors))
+                {
+                    foreach ($colors as $color)
+                    {
+                        $color_= new Product_color();
+                        $color_->product_id=$products->id;
+                        $color_->color_id=$color;
+                        $color_->save();
                     }
                 }
 
@@ -182,8 +214,19 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $id = base64_decode($id);
-        $sliders = Slider::find($id);
-        return view('backend.sliders.sliders_edit', compact('sliders'));
+        $brands = Brands::all();
+        $colors = Color::all();
+        $sizes = size::all();
+        $tags = Tag::all();
+
+        $products_edit = Products::find($id);
+
+        $allchilds = Categories::with('allChild')
+            ->where('status','=',1)
+            ->where('parent_id','=',0)
+            ->get();
+        return view('layouts.admin.storemanagment.products.product_edit', compact('products_edit','allchilds','brands',
+            'colors','sizes','tags'));
     }
 
 

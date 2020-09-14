@@ -26,6 +26,8 @@
                                 <th>{{__('price')}}</th>
                                 <th>{{__('categories')}}</th>
                                 <th>{{__('tags')}}</th>
+                                <th>{{__('size')}}</th>
+                                <th>{{__('color')}}</th>
                                 <th>{{__('status')}}</th>
                                 <th>{{__('Action')}}</th>
                             </tr>
@@ -42,11 +44,30 @@
                                     @if ($product->category)
                                         <td>{{$product->category->category_name}}</td>
                                     @endif
-                                        @foreach($product_tags as $product_tag)
-                                          @if ($product_tag->product_id == $product->id)
-                                            <td>{{$product_tag->tags->tag_name}}<br/></td>
-                                          @endif
-                                        @endforeach
+                                    <td>
+                                        @if ($product->tags)
+                                            @foreach($product->tags as $product_tag)
+                                                <label class=" label label-warning"> {{$product_tag->tag_name}}</label><br/>
+                                            @endforeach
+                                        @endif
+
+                                    </td>
+                                    <td>
+                                        @if ($product->sizes)
+                                            @foreach($product->sizes as $product_size)
+                                                <label class=" label label-warning"> {{$product_size->size_name}}</label><br/>
+                                            @endforeach
+                                        @endif
+
+                                    </td>
+                                    <td>
+                                        @if ($product->colors)
+                                            @foreach($product->colors as $product_color)
+                                                <label class=" label label-warning"> {{$product_color->color_name}}</label><br/>
+                                            @endforeach
+                                        @endif
+
+                                    </td>
 
                                     <td>@if ($product->status=='1')
                                             <span style="color:#fff0ff; background: #00A65A; padding: 3px 10px 3px 10px">{{__('active')
@@ -58,9 +79,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{route('brands_edit', base64_encode($product->id))}}"
+                                        <a href="{{route('product_edit', base64_encode($product->id))}}"
                                            class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
-                                        <a href="{{route('brands_delete', base64_encode
+                                        <a href="{{route('product_delete', base64_encode
                                      ($product->id))}}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
 

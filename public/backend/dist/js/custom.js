@@ -5,6 +5,8 @@ $('body').on('change','input[name="warranty"]',function () {
     else
         $('.warranty-box').hide();
 });
+// if($('input[name="warranty"]').val()==1)
+//     $('.warranty-box').show();
 
 
 
