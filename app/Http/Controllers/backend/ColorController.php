@@ -82,6 +82,7 @@ class ColorController extends Controller
                 'color_desc' =>$request->color_desc,
                 'status' => $request->status,
 
+
             ]);
             $color->save();
 
