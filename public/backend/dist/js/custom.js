@@ -22,3 +22,17 @@ sale_schedule.onclick = function() {
         div.style.display = 'block';
     }
 };
+
+
+
+$(".removeproductimage").click(function(e) {
+    e.preventDefault();
+    var deleted_id = $(this).data('id');
+    var hidden_data = $("#deletect_image").val();
+    debugger;
+    if (hidden_data == '')
+        $("#deletect_image").val(deleted_id);
+    else
+        $("#deletect_image").val(hidden_data + ',' + deleted_id);
+    $(this).parent().remove();
+});

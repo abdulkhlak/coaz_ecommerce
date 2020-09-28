@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{asset('backend/bower_components/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('backend/bower_components/Ionicons/css/ionicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('backend/dist/css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" href="{{asset('backend/dist/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('backend/dist/css/theme.min.css')}}">
     <link rel="stylesheet" href="{{asset('backend/dist/css/theme-responsive.min.css')}}">
     <link rel="stylesheet" href="{{asset('backend/dist/css/animate.css')}}">

@@ -23,6 +23,7 @@
         </form>
 
         <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">PRODUCT NAVIGATION</li>
 
             <li class="treeview {{ (Route::currentRouteName() == 'brands_view')||(Route::currentRouteName() == 'brands_add')? 'active': '' }} ">
                 <a href="#">
@@ -105,6 +106,7 @@
                     <li><a href="pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
                 </ul>
             </li>
+            <li class="header">SLIDER</li>
 
         </ul>
     </section>

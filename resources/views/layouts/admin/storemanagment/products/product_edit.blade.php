@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <form method="post" action="{{route('product_edit',$products_edit->id)}}" id="productform"
+                    <form method="post" action="{{route('product_update',$products_edit->id)}}" id="productform"
                           enctype="multipart/form-data">
                     @csrf
                     <!-- product  colum -->
@@ -115,7 +115,7 @@
                                             <option disabled selected>brand select</option>
                                             @foreach($brands as $brand)
                                                 <option value="{{$brand->id}}" {{$products_edit->brand_id== $brand->id
-                                                ?'selected':''}}> {{$brand->brand_name}}</option>
+                                    ?'selected':''}}> {{$brand->brand_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -172,17 +172,17 @@
                                 <div class="form-group">
                                     <label for="tags_id">{{__('product tags')}}</label>
                                     <select name="tags_id[]" multiple class="form-control select2">
-                                            @foreach($tags as $tag)
-                                                <option value="{{$tag->id}}"
-                                                        @foreach($tag_array as $tag_)
-                                                        @if($tag_->tag_id==$tag->id)
-                                                        selected
-                                                        @break;
-                                                        @endif
-                                                        @endforeach>
-                                                    {{$tag->tag_name}}</option>
+                                        @foreach($tags as $tag)
+                                            <option value="{{$tag->id}}"
+                                                    @foreach($tag_array as $tag_)
+                                                    @if($tag_->tag_id==$tag->id)
+                                                    selected
+                                                    @break;
+                                                    @endif
+                                                    @endforeach>
+                                                {{$tag->tag_name}}</option>
 
-                                            @endforeach
+                                        @endforeach
 
 
                                     </select>
@@ -201,7 +201,7 @@
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="warranty" id="warranty_2" value="0" {{
-                                            ($products_edit->warranty =="0")?"checked":""}} >
+                                ($products_edit->warranty =="0")?"checked":""}} >
                                             {{__('No')}}
                                         </label>
                                     </div>
@@ -236,16 +236,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="featured_image">{{__('featured image')}}</label>
-
                                     <div class="imagepreview">
                                         <h5>{{__('Image preview for this value')}}</h5>
                                         <p class="cat_p_desc">{{__('Upload an image')}}</p>
-                                        <img style="width: 70px;height:50px;" id="img-uploaded" src="{{(!empty($products_edit->featured_image))
-                                    ?url ('upload/store_managment/products/'.$products_edit->featured_image):url('upload/no_image
-                                    .png')}}"
+                                        <img id="preview"
+                                             src="{{(!empty($products_edit->featured_image))?url ('upload/store_managment/products/'.$products_edit->featured_image):url('upload/no_image.png')}}"
                                              alt="featured image"/>
+
                                         <div class="file-input">
-                                            <input class="choose" type="file" name="featured_image" accept="image/*">
+                                            <input class="choose" type="file" name="featured_image">
                                             <span class="button">{{__('Upload')}}</span>
                                         </div>
                                     </div>
@@ -254,6 +253,30 @@
                                     <label for="product_gallery">{{__('product gallery')}}</label>
                                     <div class="field" align="left">
                                         <input type="file" id="files" multiple name="product_gallery[]"/>
+                                    </div>
+
+                                </div>
+                                <input type="hidden" name="deletect_image" id="deletect_image" value="">
+                                <div class="form-group">
+                                    <div class="container-fluid">
+                                        <div class="row port-page">
+
+                                            @foreach($image_gallery as $gallery)
+                                            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 ">
+
+                                                <img src="{{(!empty($gallery->product_gallery))?url
+                                                ('upload/store_managment/products/'
+                                                .$gallery->product_gallery):url('upload/no_image.png')}}"
+                                                     class="img-responsive center-block port-image">
+                                                    <button class=" removeproductimage btn btn-danger "
+                                                            data-id="{{$gallery->id}}">remove</button>
+                                                </div>
+
+
+                                            @endforeach
+
+
+                                        </div>
                                     </div>
                                 </div>
 
@@ -268,7 +291,7 @@
                             </div><!-- /.box-body -->
 
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{__('Add new Category ')}}</button>
+                                <button type="submit" class="btn btn-primary">{{__('Update ')}}</button>
                             </div>
 
 
