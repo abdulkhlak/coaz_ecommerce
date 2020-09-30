@@ -48,7 +48,7 @@ class BrandsController extends Controller
 
             $brands->save();
 
-            return $brands;
+            //return $brands;
 
         } catch (Exception $exception) {
             $brands = false;

@@ -265,7 +265,7 @@
                                             <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 ">
 
                                                 <img src="{{(!empty($gallery->product_gallery))?url
-                                                ('upload/store_managment/products/'
+                                                ('upload/store_managment/products/gallery_image/'
                                                 .$gallery->product_gallery):url('upload/no_image.png')}}"
                                                      class="img-responsive center-block port-image">
                                                     <button class=" removeproductimage btn btn-danger "
@@ -281,11 +281,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <select class="form-control" name="status" style="width: 100%;">
+
+                                    <select class="form-control"  name="status" style="width: 30%;">
                                         <option selected disabled> Status</option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
-                                    </select>
+                                        <option value="1" {{($products_edit->status =="1")?"selected":""}}>active</option>
+                                        <option value="0" {{($products_edit->status =="0")?"selected":""}}>Inactive</select>
                                 </div>
 
                             </div><!-- /.box-body -->

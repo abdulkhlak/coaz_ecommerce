@@ -103,3 +103,17 @@ Route::group(['prefix' => 'products',  'middleware' => 'auth'], function()
     Route::get('/delete/{id}','Backend\ProductsController@delete')->name('product_delete');
 
 });
+// DISCOUNT ROUTE
+
+Route::group(['prefix' => 'coupon',  'middleware' => 'auth'], function()
+{
+    Route::get('/view','Backend\CouponController@view')->name('coupon_view');
+    Route::get('/add','Backend\CouponController@add')->name('coupon_add');
+    Route::post('/store','Backend\CouponController@store')->name('coupon_store');
+    Route::get('/couponStatus/{id}/{s}','Backend\CouponController@couponStatus')->name('coupon_status');
+    Route::get('/find-coupon/{id}','Backend\CouponController@findcoupon')->name('find_coupon');
+    Route::get('/edit/{id}','Backend\CouponController@edit')->name('coupon_edit');
+    Route::post('/update/{id}','Backend\CouponController@update')->name('coupon_update');
+    Route::get('/delete/{id}','Backend\CouponController@delete')->name('coupon_delete');
+
+});

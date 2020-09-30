@@ -51,6 +51,7 @@ class ProductsController extends Controller
 		$this->validate($request, [
 			'product_name' => ['required', 'unique:Products,product_name'],
 			'regular_price' => ['required'],
+			'status' => ['required'],
 		]);
 		$products = null;
 		try {
@@ -88,7 +89,6 @@ class ProductsController extends Controller
 				$file->move(public_path('upload/store_managment/products'), $filename);
 				$products->featured_image = $filename;
 			}
-
 
 			$products->save();
 			if ($products->save()) {
@@ -140,22 +140,6 @@ class ProductsController extends Controller
 				}
 
 			}
-			//  Handle multiple file upload
-//            $gallery=[];
-//            if ($request->hasFile('product_gallery'))
-//            {
-//                foreach ($request->file('product_gallery')as $image_gallary)
-//                {
-//                    $name=time().'.'.$image_gallary->getClientOriginalName();
-//                    $image_gallary->move(public_path('upload/store_managment/products'),$name);
-//                    array_push($gallery,$name);
-//                }
-//            }
-//            // $products->product_gallery=implode(',',$gallery);
-////            dd($products);
-////
-////            return $products;
-
 
 		} catch (Exception $exception) {
 			$products = false;
@@ -209,10 +193,10 @@ class ProductsController extends Controller
 
 		$brands        = Brands::all();
 		$colors        = Color::all();
-		$color_array   = Product_color::select('color_id')->where('product_id', $products_edit->id)->orderBy('id', 'asc')
+		$color_array   = Product_color::where('product_id', $products_edit->id)->orderBy('id', 'asc')
 			->get();
 		$sizes         = size::all();
-		$size_array    = Product_size::select('size_id')->where('product_id', $products_edit->id)->orderBy('id', 'asc')
+		$size_array    = Product_size::where('product_id', $products_edit->id)->orderBy('id', 'asc')
 			->get();
 		$tags          = Tag::all();
 		$tag_array     = Product_tags::select('tag_id')->where('product_id', $products_edit->id)->orderBy('id', 'asc')
@@ -235,46 +219,48 @@ class ProductsController extends Controller
 	}
 	public function update(Request $request ,$id)
 	{
-		$products = null;
+		$products = Products::find($id);
+		$product = null;
 		try {
 
-//			$product_name = $request->product_name;
-//			$products     = Products::find($id)([
-//				'cat_id' => $request->cat_id,
-//				'brand_id' => $request->brand_id,
-//				'product_name' => $product_name,
-//				'product_slug' => slugify($product_name),
-//				'description' => $request->description,
-//				'regular_price' => $request->regular_price,
-//				'sale_price' => $request->sale_price,
-//				'sale_date_start' => $request->sale_date_start,
-//				'sale_date_end' => $request->sale_date_end,
-//				'product_model' => $request->product_model,
-//				'product_code' => $request->product_code,
-//				'product_status' => $request->product_status,
-//				'product_weight' => $request->product_weight,
-//				'product_description' => $request->product_description,
-//				'quantity' => $request->quantity,
-//				'warranty' => $request->warranty,
-//				'warranty_duration' => $request->warranty_duration,
-//				'warranty_condition' => $request->warranty_condition,
-//				'video_url' => $request->video_url,
-//				'status' => $request->status,
-//
-//			]);
-//
-//
-//			if ($request->file('featured_image')) {
-//				$file = $request->file('featured_image');
-//				//	@unlink(public_path('upload/store_managment/products/' . $products->featured_image));
-//				$filename = date('YmdHi') . $file->getClientOriginalName();
-//				$file->move(public_path('upload/store_managment/products'), $filename);
-//				$products->featured_image = $filename;
-//			}
-//
-//
-//			$products->save();
-			//if ($products->save()) {
+			$product_name = $request->product_name;
+			$products->update([
+				'cat_id' => $request->cat_id,
+				'brand_id' => $request->brand_id,
+				'product_name' => $product_name,
+				'product_slug' => slugify($product_name),
+				'description' => $request->description,
+				'regular_price' => $request->regular_price,
+				'sale_price' => $request->sale_price,
+				'sale_date_start' => $request->sale_date_start,
+				'sale_date_end' => $request->sale_date_end,
+				'product_model' => $request->product_model,
+				'product_code' => $request->product_code,
+				'product_status' => $request->product_status,
+				'product_weight' => $request->product_weight,
+				'product_description' => $request->product_description,
+				'quantity' => $request->quantity,
+				'warranty' => $request->warranty,
+				'warranty_duration' => $request->warranty_duration,
+				'warranty_condition' => $request->warranty_condition,
+				'video_url' => $request->video_url,
+				'status' => $request->status,
+
+			]);
+
+
+			if ($request->file('featured_image')) {
+				$file = $request->file('featured_image');
+			@unlink(public_path('upload/store_managment/products/' . $products->featured_image));
+				$filename = date('YmdHi') . $file->getClientOriginalName();
+				$file->move(public_path('upload/store_managment/products'), $filename);
+
+				$products->featured_image = $filename;
+			}
+
+
+			$products->save();
+			if ($products->save()) {
 				if($request->has('deletect_image')&& isset($request->deletect_image))
 				{
 					$deleted_image=$request->deletect_image;
@@ -289,6 +275,7 @@ class ProductsController extends Controller
 				$files = $request->product_gallery;
 				if (!empty($files)) {
 					foreach ($files as $file) {
+					//	@unlink(public_path('upload/store_managment/products/' . $file->product_gallery));
 						$imageName = date('Ymd') . $file->getClientOriginalName();
 						$file->move('upload/store_managment/products/gallery_image/', $imageName);
 						//$product_gallery['product_gallery'] = $imageName;
@@ -300,8 +287,13 @@ class ProductsController extends Controller
 					}
 				}
 
-				// tags
+				// tags update
+
 				$tags = $request->tags_id;
+				if (!empty($tags))
+				{
+					Product_tags::where('product_id',$id)->delete();
+				}
 				if (!empty($tags)) {
 					foreach ($tags as $tag) {
 						$tags_             = new Product_tags();
@@ -311,8 +303,13 @@ class ProductsController extends Controller
 					}
 				}
 
-				// Size
+				// Size update
+
 				$sizes = $request->size_id;
+				if (!empty($sizes))
+				{
+					Product_size::where('product_id',$id)->delete();
+				}
 				if (!empty($sizes)) {
 					foreach ($sizes as $size) {
 						$size_             = new Product_size();
@@ -322,8 +319,12 @@ class ProductsController extends Controller
 					}
 				}
 
-				// Color
+				// Color update
 				$colors = $request->color_id;
+				if (!empty($colors))
+				{
+					Product_color::where('product_id',$id)->delete();
+				}
 				if (!empty($colors)) {
 					foreach ($colors as $color) {
 						$color_             = new Product_color();
@@ -333,49 +334,29 @@ class ProductsController extends Controller
 					}
 				}
 
-			//}
-			//  Handle multiple file upload
-//            $gallery=[];
-//            if ($request->hasFile('product_gallery'))
-//            {
-//                foreach ($request->file('product_gallery')as $image_gallary)
-//                {
-//                    $name=time().'.'.$image_gallary->getClientOriginalName();
-//                    $image_gallary->move(public_path('upload/store_managment/products'),$name);
-//                    array_push($gallery,$name);
-//                }
-//            }
-//            // $products->product_gallery=implode(',',$gallery);
-////            dd($products);
-////
-////            return $products;
+			}
+
 
 
 		} catch (Exception $exception) {
 			$products = false;
 		}
 		if ($products == true) {
-			return redirect()->route('product_view')->with('success', 'Product has been successfully created !');
+			return redirect()->route('product_view')->with('success', 'Product has been successfully update !');
 		} else {
-			return back()->with('error', 'Oops! Unable to create a Product ');
+			return back()->with('error', 'Oops! Unable to update a Product ');
 		}
 
 	}
 
-
+	// product delete
 
 	public function delete($id)
 	{
-		try {
-			$id = base64_decode($id);
+		$id = base64_decode($id);
 
-			$slider = Slider::find($id);
-			unlink(public_path('upload/sliders/') . $slider->image);
-			$slider->delete();
-			return redirect()->route('sliders_view')->with('success', ' slider has been delete successfully');
-		} catch (Exception $exception) {
-			return back()->with('error', 'Oops! Unable to delete a slider ');
-		}
-
+		$product = Products::find($id);
+		$product->delete();
+		return redirect()->route('product_view')->with('success', ' product has been delete successfully');
 	}
 }

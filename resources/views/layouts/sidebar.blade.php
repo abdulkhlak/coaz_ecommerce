@@ -41,6 +41,22 @@
                 </ul>
             </li>
 
+            <li class="treeview {{ (Route::currentRouteName() == 'coupon_view')||(Route::currentRouteName() == 'coupon_add')? 'active': '' }} ">
+                <a href="#">
+                    <i class="fas fa-tshirt"></i>
+                    <span>{{__('Coupon')}}</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ (Route::currentRouteName() == 'coupon_view')? 'active': '' }}"><a href="{{route("coupon_view")}}">
+                            {{__('All coupon')}}</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'coupon_add')? 'active': '' }}"><a href="{{route("coupon_add")}}">
+                            {{__('Create new coupon')}}</a></li>
+                </ul>
+            </li>
+
             <li class="treeview {{ (Route::currentRouteName() == 'product_view')
             ||(Route::currentRouteName() == 'product_add')
             ||(Route::currentRouteName() == 'categories_view')
