@@ -26,6 +26,7 @@ class BrandsController extends Controller
     {
         $this->validate($request, [
             'brand_name' => ['required', 'string', 'max:100', 'unique:brands,brand_name'],
+            'status' => ['required'],
         ]);
         $brands = null;
         try {

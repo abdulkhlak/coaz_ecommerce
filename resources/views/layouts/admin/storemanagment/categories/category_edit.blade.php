@@ -66,7 +66,7 @@
                                     <div class="imagepreview">
                                         <h5>{{__('Image preview for this value')}}</h5>
                                         <p class="cat_p_desc">{{__('Upload an image')}}</p>
-                                        <img style="width: 70px;height:50px;" id="img-uploaded" src="{{(!empty($category->category_logo))
+                                        <img style="width: 70px;height:50px;" id="preview" src="{{(!empty($category->category_logo))
                                     ?url ('upload/store_managment/icon/'.$category->category_logo):url('upload/no_image.png')}}"
                                              alt="brand logo" />
                                         <div class="file-input">

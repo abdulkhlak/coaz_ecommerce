@@ -23,11 +23,14 @@
         </form>
 
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">PRODUCT NAVIGATION</li>
+
+            <li class="header">STORE MANAGMENT</li>
+            <br/>
+
 
             <li class="treeview {{ (Route::currentRouteName() == 'brands_view')||(Route::currentRouteName() == 'brands_add')? 'active': '' }} ">
                 <a href="#">
-                    <i class="fas fa-tshirt"></i>
+                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                     <span>{{__('Brands')}}</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -43,15 +46,15 @@
 
             <li class="treeview {{ (Route::currentRouteName() == 'coupon_view')||(Route::currentRouteName() == 'coupon_add')? 'active': '' }} ">
                 <a href="#">
-                    <i class="fas fa-tshirt"></i>
-                    <span>{{__('Coupon')}}</span>
+                    <i class="fa fa-certificate" aria-hidden="true"></i>
+                    <span>{{__('Coupons')}}</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ (Route::currentRouteName() == 'coupon_view')? 'active': '' }}"><a href="{{route("coupon_view")}}">
-                            {{__('All coupon')}}</a></li>
+                            {{__('All coupons')}}</a></li>
                     <li class="{{ (Route::currentRouteName() == 'coupon_add')? 'active': '' }}"><a href="{{route("coupon_add")}}">
                             {{__('Create new coupon')}}</a></li>
                 </ul>
@@ -97,32 +100,49 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ (Route::currentRouteName() == 'size_view')? 'active': '' }}"><a
-                                href="{{route('size_view')}}">{{__('All size guides')}}</a></li>
+                                href="{{route('size_view')}}">{{__('size guides')}}</a></li>
                     <li class="{{ (Route::currentRouteName() == 'color_view')? 'active': '' }}"><a
-                                href="{{route('color_view')}}">{{__('All Color')}}</a></li>
+                                href="{{route('color_view')}}">{{__('Colors')}}</a></li>
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="header">SLIDERS</li>
+            <br/>
+
+
+            <li class="treeview  {{ (Route::currentRouteName() == 'slider_view')
+            ||(Route::currentRouteName() == 'slider_add')
+            ||(Route::currentRouteName() == 'slider_view')?
+            'active': '' }}">
                 <a href="#">
-                    <i class="fa fa-folder"></i> <span>Examples</span>
+                    <i class="fa fa-sliders" aria-hidden="true"></i>
+                    <span>{{__('Sliders')}}</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                    <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-                    <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-                    <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-                    <li><a href="pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-                    <li><a href="pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                    <li><a href="pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                    <li><a href="pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-                    <li><a href="pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'slider_view')? 'active': '' }}"><a href="{{route('slider_view')}}">{{__('Sliders')}}</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'slider_add')? 'active': '' }}"><a
+                                href="{{route('slider_add')}}">{{__('Add new slider')}}</a></li>
                 </ul>
             </li>
-            <li class="header">SLIDER</li>
+            <li class="treeview  {{ (Route::currentRouteName() == 'banner_view')
+            ||(Route::currentRouteName() == 'banner_add')
+            ||(Route::currentRouteName() == 'banner_view')?
+            'active': '' }}">
+                <a href="#">
+                    <i class="fa fa-sliders" aria-hidden="true"></i>
+                    <span>{{__('Banners')}}</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ (Route::currentRouteName() == 'bannner_view')? 'active': '' }}"><a href="{{route
+                    ('banner_view')}}">{{__('Banners')}}</a></li>
+                </ul>
+            </li>
 
         </ul>
     </section>

@@ -80,8 +80,13 @@
                                     <label for="product_status">{{__('product status')}}</label>
                                     <select class="form-control" name="product_status" id="product_status"
                                             style="width: 30%;">
-                                        <option value="1" {{($products_edit->product_status =="1")?"selected":""}}>New
+                                        <option value="1" {{($products_edit->product_status =="1")
+                                        ?"selected":""}}>New
                                         </option>
+                                        <option value="2" {{($products_edit->product_status =="2")
+                                        ?"selected":""}}>Hot </option>
+                                        <option value="3" {{($products_edit->product_status =="3")
+                                        ?"selected":""}}>Sale </option>
                                         <option value="0" {{($products_edit->product_status =="0")?"selected":""}}>
                                             None
                                         </option>
@@ -262,14 +267,15 @@
                                         <div class="row port-page">
 
                                             @foreach($image_gallery as $gallery)
-                                            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 ">
+                                                <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 ">
 
-                                                <img src="{{(!empty($gallery->product_gallery))?url
+                                                    <img src="{{(!empty($gallery->product_gallery))?url
                                                 ('upload/store_managment/products/gallery_image/'
                                                 .$gallery->product_gallery):url('upload/no_image.png')}}"
-                                                     class="img-responsive center-block port-image">
+                                                         class="img-responsive center-block port-image">
                                                     <button class=" removeproductimage btn btn-danger "
-                                                            data-id="{{$gallery->id}}">remove</button>
+                                                            data-id="{{$gallery->id}}">remove
+                                                    </button>
                                                 </div>
 
 
@@ -282,10 +288,12 @@
 
                                 <div class="form-group">
 
-                                    <select class="form-control"  name="status" style="width: 30%;">
+                                    <select class="form-control" name="status" style="width: 30%;">
                                         <option selected disabled> Status</option>
-                                        <option value="1" {{($products_edit->status =="1")?"selected":""}}>active</option>
-                                        <option value="0" {{($products_edit->status =="0")?"selected":""}}>Inactive</select>
+                                        <option value="1" {{($products_edit->status =="1")?"selected":""}}>active
+                                        </option>
+                                        <option value="0" {{($products_edit->status =="0")?"selected":""}}>Inactive
+                                    </select>
                                 </div>
 
                             </div><!-- /.box-body -->

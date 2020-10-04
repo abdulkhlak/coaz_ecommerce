@@ -80,6 +80,8 @@
                                             <option disabled selected >{{__('status')}}</option>
                                             <option value="0">{{__('None')}}</option>
                                             <option value="1">{{__('New')}}</option>
+                                            <option value="2">{{__('Hot')}}</option>
+                                            <option value="3">{{__('sale')}}</option>
 
                                         </select>
                                     </div>
