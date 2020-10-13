@@ -2,6 +2,7 @@
 
 // =============================FRONTEND ALL ROTUE ========================
 Route::get('/','Frontend\FrontendController@index')->name('frontend');
+Route::get('/category','Frontend\FrontendController@category')->name('category');
 
 
 
