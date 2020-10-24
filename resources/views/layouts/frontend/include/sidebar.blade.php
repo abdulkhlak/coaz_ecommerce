@@ -1,49 +1,56 @@
-<div class="side-menu animate-dropdown outer-bottom-xs">
 
-    <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
-    <nav class="yamm megamenu-horizontal">
-        <ul class="nav">
-            @if($categories)
-            @foreach($categories as $category)
-            <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon
-             fa fa-diamond"></i>{{$category->category_name}}</a>
+<div class="col-xs-12 col-sm-12 col-md-3 sidebar">
 
-                    @if ($category->allChild)
+    <!-- ================================== TOP NAVIGATION ================================== -->
+    <div class="side-menu animate-dropdown outer-bottom-xs">
+        <div class="head">Top Category</div>
+        <nav class="yamm megamenu-horizontal">
+            <ul class="nav">
 
-                    <ul class="dropdown-menu mega-menu">
-                    @foreach($category->allChild as $childs)
-                    <li class="yamm-content">
-                        <div class="row">
+                @foreach($categories as $category)
+                    <li class="dropdown menu-item"><a href="#" class="dropdown-toggle"
+                                                      data-toggle="dropdown">{{$category->category_name}}</a>
+                        @if(count($category->allChild))
+                            <ul class="dropdown-menu mega-menu">
 
+                                <li class="yamm-content">
 
-                            <div class="col-sm-12 col-md-3">
+                                    <div class="row">
 
+                                        @foreach($category->allChild as $subcategory)
+                                            <div class="col-sm-12 col-md-3">
+                                                <ul class="links list-unstyled">
+                                                    <li><a href="">{{$subcategory->category_name}}</a></li>
 
-                                <ul class="links list-unstyled">
+                                                </ul>
+                                            </div>
 
+                                    @endforeach
 
-                                    <li><a href="#">{{$childs->category_name}}</a></li>
+                                    <!-- /.col -->
 
-                                </ul>
-                            </div>
+                                        <!-- /.col -->
+                                    </div>
 
+                                    <!-- /.row -->
+                                </li>
 
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </li>
-                    <!-- /.yamm-content -->
-                @endforeach
-        </ul>
-                @endif
-
-                <!-- /.dropdown-menu --> </li>
-        @endforeach
-            @endif
+                                <!-- /.yamm-content -->
+                            </ul>
+                    @endif
+                    <!-- /.dropdown-menu --> </li>
+            @endforeach
             <!-- /.menu-item -->
-        </ul>
-        <!-- /.nav -->
-    </nav>
 
-    <!-- /.megamenu-horizontal -->
+
+
+            </ul>
+            <!-- /.nav -->
+        </nav>
+        <!-- /.megamenu-horizontal -->
+    </div>
+    <!-- /.side-menu -->
+    <!-- ================================== TOP NAVIGATION : END ================================== -->
+
 </div>
+<!-- /.sidemenu-holder -->
