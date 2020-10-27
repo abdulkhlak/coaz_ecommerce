@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Banners;
 use App\Brands;
+use App\Products;
 use App\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,5 +27,15 @@ class FrontendController extends Controller
 		return view('frontend',compact('categories','banners','sliders','brands'));
 	}
 
+
+
+	// category wise product showing
+	public function cat_wise_product($slug)
+	{
+		$id= Categories::where('category_slug',$slug)->pluck('id');
+		$products= Products::where('cat_id', $id)->get();
+	return $products;
+		return view('frontend.pages.sub_wise_product',compact('products'));
+	}
 
 }

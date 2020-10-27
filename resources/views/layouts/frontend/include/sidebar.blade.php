@@ -20,7 +20,8 @@
                                         @foreach($category->allChild as $subcategory)
                                             <div class="col-sm-12 col-md-3">
                                                 <ul class="links list-unstyled">
-                                                    <li><a href="">{{$subcategory->category_name}}</a></li>
+                                                    <li><a href="{{route('cat_wise_product',$subcategory->category_slug)
+                                                    }}">{{$subcategory->category_name}}</a></li>
 
                                                 </ul>
                                             </div>

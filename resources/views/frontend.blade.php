@@ -32,30 +32,64 @@
 
       </div>
       <!-- /.homebanner-holder -->
-      <!-- ============================================== CONTENT : END ============================================== -->
-   </div>
-   <!-- /.row -->
-   <section>
-       <style>
-           .test{
-               width: 190px;
-               height: 126px;
-           }
-       </style>
        <div class="row">
-           @if ($banners)
-               @foreach($banners as $banner)
-                <div class="col-xs-2  ">
-                   <img  id="img-uploaded"src="{{(!empty($banner->home_banner))?url ('upload/banners/'.$banner->home_banner):url('upload/no_image.png')}}"
-                        alt="banner image" />
-                </div>
-             @endforeach
-           @endif
+
+           <div class="col-md-12">
+               @if ($banners)
+                   @foreach($banners as $banner)
+                       <div class="CollectionGrid-container">
+                           <a class="CollectionGrid-tile " href="#">
+                               <div class="CollectionGrid-tileImage align-center">
+                                   <img  id="img-uploaded"src="{{(!empty($banner->home_banner))?url
+                                   ('upload/banners/'.$banner->home_banner):url('upload/no_image.png')}}"
+                                         alt="banner image" />
+                               </div>
+
+                           </a>
+
+
+                       </div>
+                   @endforeach
+               @endif
+           </div>
+
 
 
        </div>
-   </section>
-   <section>
+       <div class="row">
+           <div class="col-md-9">
+               <h2>Shop by Brands</h2>
+           </div>  <div class="col-md-3">
+
+           </div>
+           <div class="col-md-12">
+               @if($brands)
+                   @foreach($brands as $brand)
+                       <div class="CollectionGrid-container">
+                           <a class="CollectionGrid-tile " href="#">
+                               <div class="CollectionGrid-tileImage align-center">
+                                   <img id="brand-image-size"src="{{(!empty($brand->brand_logo))?url
+                                   ('upload/store_managment/brands_logo/'.$brand->brand_logo):url('upload/no_image.png')}}"
+                                         alt="banner image" />
+                               </div>
+                               <div class="CollectionGrid-tileName js-dotdotdot">
+                                   {{$brand->brand_name}}
+                               </div>
+                           </a>
+
+
+                       </div>
+                   @endforeach
+               @endif
+           </div>
+
+
+
+       </div>
+      <!-- ============================================== CONTENT : END ============================================== -->
+   </div>
+   <!-- /.row -->
+
 
 {{--      <!-- ============================================== INFO BOXES ============================================== -->--}}
 {{--      <div class="info-boxes wow fadeInUp">--}}
@@ -132,30 +166,6 @@
 {{--      </div>--}}
       <!-- /.scroll-tabs -->
 
-      <div class="container">
-         <div class="row">
-            <div class="col-md-12">
-               @foreach($categories as $category)
-            <div class="col-md-5ths">
-               <div class="catloogo">
-               <img  id="img-uploaded" width="150" height="150" src="{{(!empty($category->category_logo))?url
-               ('upload/store_managment/icon/'
-               .$category->category_logo)
-               :url('upload/no_image.png')}}"
-                     alt="banner image" />
-               </div>
-               <div class="catname">
-                  <h4>{{$category->category_name}}</h4>
-               </div>
-
-            </div>
-
-                  @endforeach
-         </div>
-         </div>
-
-
-      </div>
 
       <!-- ============================================== SCROLL TABS : END ============================================== -->
    </section>

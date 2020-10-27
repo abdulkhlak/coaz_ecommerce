@@ -10262,8 +10262,13 @@ button.button span span {
 	color: #3d6611;
 }
 #img-uploaded{
-	width: 190px;
-	height: 126px;
+	width: 100%;
+	height: auto;
+	padding: 15px 15px 15px ;
+}
+#brand-image-size{
+	width: 50%;
+	height: auto;
 	padding: 15px 15px 15px ;
 }
 
@@ -10277,33 +10282,5 @@ button.button span span {
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
-}
-
-@media (min-width: 576px) {
-    .col-sm-5ths {width: 20%;float: left;}
-    .col-sm-two5ths {width: 40%;float: left;}
-    .col-sm-three5ths {width: 60%;float: left;}
-    .col-sm-four5ths {width: 80%;float: left;}
-}
-
-@media (min-width: 768px) {
-    .col-md-5ths {width: 20%;float: left;}
-    .col-md-two5ths {width: 40%;float: left;}
-    .col-md-three5ths {width: 60%;float: left;}
-    .col-md-four5ths {width: 80%;float: left;}
-}
-
-@media (min-width: 992px) {
-    .col-lg-5ths {width: 20%;float: left;}
-    .col-lg-two5ths {width: 40%;float: left;}
-    .col-lg-three5ths {width: 60%;float: left;}
-    .col-lg-four5ths {width: 80%;float: left;}
-}
-
-@media (min-width: 1200px) {
-    .col-xl-5ths {width: 20%;float: left;}
-    .col-xl-two5ths {width: 40%;float: left;}
-    .col-xl-three5ths {width: 60%;float: left;}
-    .col-xl-four5ths {width: 80%;float: left;}
 }
 

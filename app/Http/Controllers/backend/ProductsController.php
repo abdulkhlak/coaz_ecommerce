@@ -90,6 +90,7 @@ class ProductsController extends Controller
 				$products->featured_image = $filename;
 			}
 
+
 			$products->save();
 			if ($products->save()) {
 				$files = $request->product_gallery;

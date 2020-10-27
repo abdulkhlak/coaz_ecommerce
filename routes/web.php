@@ -4,6 +4,10 @@
 Route::get('/','Frontend\FrontendController@index')->name('frontend');
 Route::get('/category','Frontend\FrontendController@category')->name('category');
 
+Route::group(['prefix' => 'category'], function() {
+	Route::get('/child-category/{slug}','Frontend\FrontendController@cat_wise_product')->name('cat_wise_product');
+});
+
 
 
 
