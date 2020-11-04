@@ -2731,7 +2731,7 @@ age-container #owl-main .owl-next {
 }
 .product .product-info .product-price .price-before-discount {
   text-decoration: line-through;
-  color: #d3d3d3;
+  color: #666666;
   font-weight: 400;
   line-height: 30px;
   font-size: 14px;
@@ -5862,3 +5862,7 @@ z-index:10000
     margin-top: 30px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);
 	}
+
+.discount-price{
+  color: red;
+}
